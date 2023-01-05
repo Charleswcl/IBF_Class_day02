@@ -1,34 +1,42 @@
-package day02.workshop;
+package workshop;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.security.SecureRandom;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class Deck {
-  private ArrayList<Card> cards;
+  private List<Card> deck;
 
   public Deck() {
-    // Create an ArrayList of cards, then add 52 cards to it,
-    // with one of each rank and suit
-    cards = new ArrayList<Card>();
-    for (int suit = 0; suit <= 3; suit++) {
-      for (int rank = 1; rank <= 13; rank++) {
-        cards.add(new Card(rank, suit));
+    this.deck = new LinkedList<>();
+    for (int i = 0; i < Constants.SUITS.length; i++) {
+      String suit = Constants.SUITS[i];
+      for (int j = 0; j < Constants.VALUES.length; j++) {
+      Integer value = Constants.VALUES[j];
+      String name = Constants.NAMES[j];
+      Card card = new Card(suit, value, name);
+      deck.add(card);  
       }
     }
   }
 
   public void shuffle() {
-    // Use the Collections class to shuffle the deck
-    Collections.shuffle(cards);
+
+    Random rand = new SecureRandom();
+
+    for (int curr = 0; curr < deck.size(); curr++) {
+      int toSwap = rand.nextInt(deck.size());
+      Card c = deck.get(curr);
+      Card d = deck.get(toSwap);
+      deck.set(curr, d);
+      deck.set(toSwap, c);
+    }
   }
 
-  public Card deal() {
-    // Remove the first card from the deck and return it
-    return cards.remove(0);
-  }
-
-  public int size() {
-    // Return the number of cards left in the deck
-    return cards.size();
+  @Override
+  public String toString() {
+    return "Deck [deck=" + deck + "]";
   }
 }
+

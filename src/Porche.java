@@ -1,21 +1,27 @@
-package sdf;
+package src;
 
-public class Porsche extends Car {
+public class Porche extends Car {
 
     private String turbo = "off";
     private int accelerate = 0;
 
-    public Porsche() {
+    public Porche() {
         super.setColour("red");
     }
     
-    public Porsche(String colour, String registration) {
-        setColour(colour);
+    public Porche(String colour, String registration) {
+        // colour is protected so all child class can access it
+        this.colour = colour;
         setRegistration(registration);
     }
 
     public String getTurbo() { return turbo; }
 
+    // I can no longer change the colour of the car
+    // once it has been instatiated.
+    @Override
+    public void setColour(String c) {}
+    
     public void accelerate() {
         this.accelerate++;
         if (this.accelerate > 4) {

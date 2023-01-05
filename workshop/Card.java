@@ -1,38 +1,24 @@
-package day02.workshop;
+package workshop;
 
 public class Card {
-    private int rank;
-    private int suit;
   
-    public Card(int rank, int suit) {
-      this.rank = rank;
+    private String suit;
+    private Integer value;
+    private String name;
+
+    public Card(String suit, Integer value, String name) {
       this.suit = suit;
+      this.value = value;
+      this.name = name;
     }
-  
-    public int getRank() {
-      return rank;
-    }
-  
-    public int getSuit() {
-      return suit;
-    }
-  
+
+    public String getSuit() { return suit;}
+    public Integer getValue() { return value;}
+    public String getName() { return name;}
+
+    @Override
     public String toString() {
-      String suitString = "";
-      switch (suit) {
-        case 0:
-          suitString = "Clubs";
-          break;
-        case 1:
-          suitString = "Diamonds";
-          break;
-        case 2:
-          suitString = "Hearts";
-          break;
-        case 3:
-          suitString = "Spades";
-          break;
-      }
-      return rank + " of " + suitString;
+      return "Card{name=%s, suit=%s, value=%d}".formatted(this.name, this.suit, this.value);
+
     }
   }
